@@ -1,0 +1,6 @@
+.venv/
+ .venv/
+ .prjvenv/
+__pycache__/
+parser.out
+parsetab.py

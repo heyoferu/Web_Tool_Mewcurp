@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script> <!-- LIBRERIA PARA EL ARBOL -->
+</head>
+<body>
+    <div class="cal">
+        <div class="title-cat">
+            <h1>Catculator</h1>
+        </div>
+
+        <form method="POST" action="/">
+            <div class="display">
+                {% if input %}
+                <textarea readonly name="cal_display" id="cal_display">{{ input }}</textarea>
+                {% else %}
+                <textarea readonly name="cal_display" id="cal_display">0</textarea>
+                {% endif %}
+                {% if result %}
+                <textarea readonly name="result_display" id="result_display" placeholder="Resultado">{{ result }}</textarea>
+                {% endif %}
+            </div>
+            
+            <table>
+                <tr>
+                    <th class="action_button"><button type="submit" name="button" value="CA">CA</button></th>
+                    <th class="action_button"><button type="button" onclick="MS()">MS</button></th>
+                    <th class="action_button"><button type="button" onclick="MR()">MR</button></th>
+                    <th class="action_button"><button type="button" onclick="MC()">MC</button></th>
+                </tr>
+                <tr>
+                    <th class="c_button"><button type="button" onclick="clear_screen()">C</button></th>
+                    <th class="action_button"><button type="button" onclick="r()">R</button></th>
+                    <th class="action_button"><button type="button" onclick="insert('-')">-</button></th>
+                    <th class="action_button"><button type="button" onclick="insert('^')">^</button></th>
+                </tr>
+                <tr>
+                    <th class="calbutton"><button type="button" onclick="insert('7')">7</button></th>
+                    <th class="calbutton"><button type="button" onclick="insert('8')">8</button></th>
+                    <th class="calbutton"><button type="button" onclick="insert('9')">9</button></th>
+                    <th class="action_button"><button type="button" onclick="insert('*')">*</button></th>
+                </tr>
+                <tr>
+                    <th class="calbutton"><button type="button" onclick="insert('4')">4</button></th>
+                    <th class="calbutton"><button type="button" onclick="insert('5')">5</button></th>
+                    <th class="calbutton"><button type="button" onclick="insert('6')">6</button></th>
+                    <th class="action_button"><button type="button" onclick="insert('/')">/</button></th>
+                </tr>
+
+                <tr>
+                    <th class="calbutton"><button type="button" onclick="insert('1')">1</button></th>
+                    <th class="calbutton"><button type="button" onclick="insert('2')">2</button></th>
+                    <th class="calbutton"><button type="button" onclick="insert('3')">3</button></th>
+                    <th class="action_button"><button type="button" onclick="insert('+')">+</button></tr>
+                </tr>
+                <tr>
+                    <th class="calbutton"><button type="button" onclick="insert('0')">0</button></th>
+                    <th class="action_button"><button type="button" onclick="insert('.')">.</button></th>
+                    <th class="equals_button"><button type="submit" name="button" value="result">=</button></th>
+                    <th class="tree_button"><button type="button" onclick="generateTree()">Tree</button></th>
+                </tr>
+            </table>
+        </form>
+        
+        {% if tokens %}
+        <table class="tokens">
+            <tr>
+                <th>Token Value</th>
+                <th>Token Type</th>
+            </tr>
+            {% for token, type in tokens %}
+            <tr>
+                <td>{{ token }}</td>
+                <td>{{ type }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+
+    <div class="trees">
+        <div>
+            <h1 class="title-tree">Tree</h1>
+        </div>
+        <svg width="500" height="500"></svg>
+    </div>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
