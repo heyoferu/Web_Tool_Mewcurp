@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <title>Resultados de CURP</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Resultados de la CURP</h1>
+        <h1>{{ curp }}</h1>
+        <div class="resultados">
+            <p><strong>Nombre:</strong> {{ name }}</p>
+            <p><strong>Primer Apellido:</strong> {{ lastname_1 }}</p>
+            <p><strong>Segundo Apellido:</strong> {{ lastname_2 }}</p>
+            <p><strong>Año de Nacimiento:</strong> {{ year }}</p>
+            <p><strong>Mes de Nacimiento:</strong> {{ month }}</p>
+            <p><strong>Día de Nacimiento:</strong> {{ day }}</p>
+            <p><strong>Sexo:</strong> {{ sex }}</p>
+            <p><strong>Estado:</strong> {{ state }}</p>
+        </div>
+        <button onclick="window.history.back();">Regresar</button>
+    </div>
+</body>
+</html>

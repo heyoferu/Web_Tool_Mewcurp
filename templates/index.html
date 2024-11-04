@@ -1,76 +1,134 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora</title>
     <link rel="stylesheet" href="/static/css/styles.css">
-    <script src="https://d3js.org/d3.v7.min.js"></script> <!-- LIBRERIA PARA EL ARBOL -->
+    <title>Formulario de CURP</title>
 </head>
 <body>
-    <div class="cal">
-        <div class="title-cat">
-            <h1>Catculator</h1>
-        </div>
+    <div class="container">
+        <form action="/" method="POST">
+            <h1>CURP</h1>
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" name="name" placeholder="Ingresa tu nombre(s)">
 
-        <form method="POST" action="/">
-            <div class="display">
-                {% if input %}
-                <textarea readonly name="cal_display" id="cal_display">{{ input }}</textarea>
-                {% else %}
-                <textarea readonly name="cal_display" id="cal_display">0</textarea>
-                {% endif %}
-                {% if result %}
-                <textarea readonly name="result_display" id="result_display" placeholder="Resultado">{{ result }}</textarea>
-                {% endif %}
-            </div>
+            <label for="lastname_1">Primer apellido:</label>
+            <input type="text" id="lastname_1" name="lastname_1" placeholder="Ingresa tu primer apellido">
+
+            <label for="lastname_2">Apellido Materno:</label>
+            <input type="text" id="lastname_2" name="lastname_2" placeholder="Ingresa tu segundo apellido">
+
+            <label for="year">Año de nacimiento:</label>
+            <input type="text" name="year" id="year" placeholder="Ingresa el año Ej. 1943">
+
+
+            <label for="month">Mes de nacimiento:</label>
+            <select id="month" name="month" required>
+                <option value="" disabled selected>Seleciona el mes</option>
+                <option value="01">Enero</option>
+                <option value="02">Febrero</option>
+                <option value="03">Marzo</option>
+                <option value="04">Abril</option>
+                <option value="05">Mayo </option>
+                <option value="06">Junio</option>
+                <option value="07">Julio</option>
+                <option value="08">Agosto</option>
+                <option value="09">Septiembre</option>
+                <option value="10">Octubre</option>
+                <option value="11">Noviembre</option>
+                <option value="12">Diciembre</option>
+            </select>
+
+            <label for="day">Día de nacimiento:</label>
+            <select id="day" name="day" required>
+                <option value="" disabled selected>Selecciona el día</option>
+                <option value="01">1</option>
+                <option value="02">2</option>
+                <option value="03">3</option>
+                <option value="04">4</option>
+                <option value="05">5</option>
+                <option value="06">6</option>
+                <option value="07">7</option>
+                <option value="08">8</option>
+                <option value="09">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+                <option value="31">31</option>
+            </select>
+
+            <label for="sex">Sexo:</label>
+            <select name="sex" id="sex" required>
+                <option value="" disabled selected>Selecciona el sexo</option>
+                <option value="H">Masculino</option>
+                <option value="M">Femenino</option>
+            </select>
+
+            <label for="state">Estado:</label>
+            <select name="state" id="state" required>
+                <option value="" disabled selected>Selecciona el estado</option>
+                <option value="AS">Aguascalientes</option>
+                <option value="BS">Baja California Sur</option>
+                <option value="CL">Coahuila</option>
+                <option value="CS">Chiapas</option>
+                <option value="DF">Ciudad de México</option>
+                <option value="GT">Guanajuato</option>
+                <option value="HG">Hidalgo</option>
+                <option value="MC">Mexico</option>
+                <option value="MS">Morelos</option>
+                <option value="NL">Nuevo Leon</option>
+                <option value="PL">Puebla</option>
+                <option value="QR">Quintana Roo</option>
+                <option value="SL">Sinaloa</option>
+                <option value="TC">Tabasco</option>
+                <option value="TL">Tlaxcala</option>
+                <option value="YN">Yucatan</option>
+                <option value="NE">Nacido en el extranjero</option>
+                <option value="BC">Baja California</option>
+                <option value="CC">Campeche</option>
+                <option value="CM">Colima</option>
+                <option value="CH">Chihuahua</option>
+                <option value="DG">Durango</option>
+                <option value="GR">Guerrero</option>
+                <option value="JC">Jalisco</option>
+                <option value="MN">Michoacan</option>
+                <option value="NT">Nayarit</option>
+                <option value="OC">Oaxaca</option>
+                <option value="QT">Queretaro</option>
+                <option value="SP">San Luis Potosi</option>
+                <option value="SR">Sonora</option>
+                <option value="TS">Tamaulipas</option>
+                <option value="VZ">Veracruz</option>
+                <option value="ZS">Zacatecas</option>
+            </select>
             
-            <table>
-                <tr>
-                    <th class="action_button"><button type="submit" name="button" value="CA">CA</button></th>
-                    <th class="action_button"><button type="button" onclick="MS()">MS</button></th>
-                    <th class="action_button"><button type="button" onclick="MR()">MR</button></th>
-                    <th class="action_button"><button type="button" onclick="MC()">MC</button></th>
-                </tr>
-                <tr>
-                    <th class="c_button"><button type="button" onclick="clear_screen()">C</button></th>
-                    <th class="action_button"><button type="button" onclick="r()">R</button></th>
-                    <th class="action_button"><button type="button" onclick="insert('-')">-</button></th>
-                    <th class="action_button"><button type="button" onclick="insert('^')">^</button></th>
-                </tr>
-                <tr>
-                    <th class="calbutton"><button type="button" onclick="insert('7')">7</button></th>
-                    <th class="calbutton"><button type="button" onclick="insert('8')">8</button></th>
-                    <th class="calbutton"><button type="button" onclick="insert('9')">9</button></th>
-                    <th class="action_button"><button type="button" onclick="insert('*')">*</button></th>
-                </tr>
-                <tr>
-                    <th class="calbutton"><button type="button" onclick="insert('4')">4</button></th>
-                    <th class="calbutton"><button type="button" onclick="insert('5')">5</button></th>
-                    <th class="calbutton"><button type="button" onclick="insert('6')">6</button></th>
-                    <th class="action_button"><button type="button" onclick="insert('/')">/</button></th>
-                </tr>
-
-                <tr>
-                    <th class="calbutton"><button type="button" onclick="insert('1')">1</button></th>
-                    <th class="calbutton"><button type="button" onclick="insert('2')">2</button></th>
-                    <th class="calbutton"><button type="button" onclick="insert('3')">3</button></th>
-                    <th class="action_button"><button type="button" onclick="insert('+')">+</button></tr>
-                </tr>
-                <tr>
-                    <th class="calbutton"><button type="button" onclick="insert('0')">0</button></th>
-                    <th class="action_button"><button type="button" onclick="insert('.')">.</button></th>
-                    <th class="equals_button"><button type="submit" name="button" value="result">=</button></th>
-                    <th class="tree_button"><button type="button" onclick="generateTree()">Tree</button></th>
-                </tr>
-            </table>
+            <button type="submit">Generar CURP</button>
         </form>
-        
-        {% if tokens %}
+
+        <!-- {% if tokens %}
         <table class="tokens">
             <tr>
-                <th>Token Value</th>
-                <th>Token Type</th>
+                <th>Token</th>
+                <th>Tipo</th>
             </tr>
             {% for token, type in tokens %}
             <tr>
@@ -79,16 +137,8 @@
             </tr>
             {% endfor %}
         </table>
-        {% endif %}
+        {% endif %} -->
+        
     </div>
-
-    <div class="trees">
-        <div>
-            <h1 class="title-tree">Tree</h1>
-        </div>
-        <svg width="500" height="500"></svg>
-    </div>
-
-    <script src="/static/js/script.js"></script>
 </body>
 </html>

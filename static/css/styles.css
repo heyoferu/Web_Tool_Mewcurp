@@ -1,183 +1,103 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
-:root {
-    /* Paleta de colores basada en Catppuccin Frappe */
-    --background-color: #303446; /* Fondo oscuro */
-    --text-color: #c6d0f5; /* Texto en modo oscuro */
-    --card-color: #414559; /* Fondo de tarjetas */
-    --textarea-color: #51576d; /* Fondo de textareas */
-    --primary-color: #8caaee; /* Color primario para botones */
-    --table-bg: #414559; /* Fondo de la tabla */
-    --table-text: #c6d0f5; /* Texto de la tabla */
-    --table-border: #626880; /* Color de borde de la tabla */
-    --neon-glow: rgba(140, 170, 238, 0.5); /* Resplandor para efectos de neón sutil */
-}
-
+/* Estilo general */
 body {
+    font-family: 'Arial', sans-serif;
+    background-color: #2e1f2d; /* Fondo Catppuccin Mocha */
     display: flex;
-    justify-content: space-between;
-    padding-left: 500px;
-    padding-right: 500px;
-    font-family: 'Orbitron', sans-serif;
-    background-color: var(--background-color);
-    color: var(--text-color);
-}
-.cal {
-    width: 400px;
-}
-.trees {
-    width: 400px;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
+.container {
+    background-color: #f6f3e8; /* Fondo suave del formulario */
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 90%;
+    max-width: 500px;
+    box-sizing: border-box;
+}
 
-table {
+/* Títulos y etiquetas */
+h1 {
+    font-size: 24px;
+    color: #6c5e67;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    color: #4e4b52;
+    font-weight: bold;
     margin-top: 10px;
+    display: block;
+}
+
+/* Estilo de los campos de texto */
+input[type="text"],
+select {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0 15px;
+    border-radius: 8px;
+    border: 1px solid #d7d5c1;
     font-size: 16px;
-    border-radius: 16px;
-    background-color: var(--table-bg);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    background-color: #f6f3e8;
+    color: #2e1f2d;
+    box-sizing: border-box;
 }
 
-table, .display {
-    width: 100%;
-    max-width: 100%; /* Asegura que no crezcan más del contenedor */
+input[type="text"]:focus,
+select:focus {
+    border-color: #c3b6a0;
+    outline: none;
 }
 
-.calbutton {
-    border-radius: 16px;
-    color: white;
-    font-weight: 16px;
-}
-.action_button {
-    background-color: var(--primary-color);
-    border-radius: 16px;
-    color: white;
-    font-weight: 16px;
-}
-.c_button {
-    background-color: #f1ce98;
-    border-radius: 16px;
-    color: white;
-    font-weight: 16px;
-}
-.equals_button {
-    background-color: #a6d189;
-    border-radius: 16px;
-    color: white;
-    font-weight: 16px;
-}
-.tree_button {
-    background-color: #d189c5;
-    border-radius: 16px;
-    color: white;
-    font-weight: 16px;
+/* Placeholder en campos de texto */
+input[type="text"]::placeholder {
+    color: #a8a29e;
 }
 
+/* Estilo de los selectores */
+select option {
+    color: #2e1f2d;
+    background-color: #f6f3e8;
+}
+
+/* Botón de envío */
 button {
-    width: 100%;
-    height: 70px;
-    color: white;
-    cursor: pointer;
+    background-color: #6c5e67;
+    color: #f6f3e8;
+    padding: 12px;
     border: none;
-    background-color: transparent;
+    border-radius: 8px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s;
 }
 
 button:hover {
-    box-shadow: 0 4px 25px rgb(0, 0, 0, 0.2), 0 0 20px var(--neon-glow);
-    border-radius: 16px;
+    background-color: #5a4a54;
 }
 
-th, td {
-    border: 1px solid var(--table-border);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
+/* Diseño responsivo */
+@media (max-width: 600px) {
+    .container {
+        width: 95%;
+    }
 
-.display {
-    height: 140px;
-    padding: 10px; /* Reduce el padding para evitar que aumente el tamaño */
-    font-family: 'Press Start 2P';
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
-    font-size: 25px;
-    text-align: right;
-    background-color: var(--table-bg);
-    border: 1px solid var(--table-border);
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), 0 0 15px var(--neon-glow);
-    box-sizing: border-box; /* Asegura que el padding no aumente el ancho total */
-}
+    h1 {
+        font-size: 20px;
+    }
 
-
-textarea {
-    background-color: transparent;
-    outline: none;
-    width: 100%;
-    border: none;
-    resize: none;
-    color: #8caaee;
-    font-size: 20px;
-    text-align: right;
-}
-
-
-.tokens {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-    font-size: 16px;
-    border-radius: 16px;
-    overflow: hidden;
-    background-color: var(--table-bg);
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4); /* Sombra sin resplandor */
-}
-
-th, td {
-    text-align: left;
-    padding: 12px;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-th {
-    background-color: var(--primary-color);
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
-}
-
-td {
-    background-color: var(--table-bg);
-    color: var(--table-text);
-}
-
-
-/* Estilo de los nodos en SVG */
-svg circle {
-    fill: var(--background-color) !important;
-    stroke: var(--primary-color) !important; /* Cambia a color primario Catppuccin */
-    stroke-width: 2px !important;
-}
-
-/* Estilo de las líneas */
-svg line {
-    stroke: var(--primary-color) !important; /* Cambia a color primario */
-    stroke-width: 2px !important;
-}
-
-/* Clase personalizada para nodos en el SVG */
-svg .node {
-    stroke: var(--primary-color) !important; 
-    stroke-width: 2px !important;
-    fill: var(--background-color) !important; 
-}
-
-/* Clase personalizada para las líneas */
-svg .line {
-    stroke: var(--primary-color) !important; 
-    stroke-width: 2px !important;
-}
-
-/* Estilo del texto en SVG */
-svg text {
-    fill: var(--text-color) !important; /* Color del texto */
+    input[type="text"],
+    select,
+    button {
+        font-size: 14px;
+        padding: 10px;
+    }
 }
