@@ -10,6 +10,8 @@
     <div class="container">
         <h1>Resultados de la CURP</h1>
         <h1>{{ curp }}</h1>
+
+        {% if error is not true%}
         <div class="resultados">
             <p><strong>Nombre:</strong> {{ name }}</p>
             <p><strong>Primer Apellido:</strong> {{ lastname_1 }}</p>
@@ -17,9 +19,11 @@
             <p><strong>Año de Nacimiento:</strong> {{ year }}</p>
             <p><strong>Mes de Nacimiento:</strong> {{ month }}</p>
             <p><strong>Día de Nacimiento:</strong> {{ day }}</p>
-            <p><strong>Sexo:</strong> {{ sex }}</p>
+            <p><strong>Sexo:</strong> {{ gen }}</p>
             <p><strong>Estado:</strong> {{ state }}</p>
         </div>
+        {% endif %}
+
         <button onclick="window.history.back();">Regresar</button>
     </div>
 </body>

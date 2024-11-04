@@ -3,6 +3,8 @@ import ply.lex as lex
 import ply.yacc as yacc
 import random
 import string
+from cities import cities
+from words import restricted_words
 
 class Mewlex():
     tokens = (
@@ -51,15 +53,38 @@ class Mewyacc():
         self.mewlex = Mewlex
         self.tokens = Mewlex.tokens
         self.parser = yacc.yacc(module=self)
-        self.__result = 0
+        self.__result = None
 
-    ### grammar
-    def p_expr(self, p):
-        pass
+    ### CURP validate
+    def p_curp(self, p):
+        '''curp : prefix date CHAR CHAR CHAR CHAR CHAR CHAR key'''
 
+    def p_prefix(self, p):
+        '''prefix : CHAR CHAR CHAR CHAR'''
+        p[0] = p[1] + p[2] + p[3] + p[4]
+        if p[0] in restricted_words:
+            p[0] = restricted_words[p[0]]
+        else:
+            pass
+        
+    def p_date(self, p):
+        '''date : NUMBER NUMBER NUMBER NUMBER NUMBER NUMBER'''
+        if p[3] + p[4] == '02' and int(p[5] + p[6]) > 2:
+            self.__result ="Febrero tiene 28 dias"
+           
+            
+        if p[3] + p[4] not in ['01','03','05','07','08','10','12'] and int(p[5] + p[6]) > 30:
+            self.__result = f"El mes seleccionado tiene 30 días"
+    
+    def p_key(self, p):
+        '''key : CHAR NUMBER
+               | NUMBER CHAR
+               | CHAR CHAR
+               | NUMBER NUMBER'''
+    
     def p_error(self, p):
         if p:
-            self.__result = f"Syntax error at token {p.value}"
+            self.__result = f"Syntax error at token {p.value} at line {p.lineno} pos {p.lexpos}"
 
         else:
             self.__result = "Syntax error at EOF" 
@@ -68,7 +93,7 @@ class Mewyacc():
     def analyze(self, data):
         self.parser.parse(data, lexer=self.mewlex().lexer)
         return self.__result
-
+        
 
 class Mewcurp:
     def __init__(self):
@@ -76,9 +101,9 @@ class Mewcurp:
         self.__vowels = 'AEIOU'
 
 
-    def gen(self, name, lastname_1, lastname_2, year, month, day, sex, state):
+    def gen(self, name, lastname_1, lastname_2, year, month, day, gen, state):
         
-        temp = lastname_1[0] + self.get_vowel(lastname_1) + lastname_2[0] + name[0] + year + month + day + sex + state + self.get_next_consonant(lastname_1) + self.get_next_consonant(lastname_2) + self.get_next_consonant(name) + self.hkey()
+        temp = lastname_1[0] + self.get_vowel(lastname_1) + lastname_2[0] + name[0] + year + month + day + gen + state + self.get_next_consonant(lastname_1) + self.get_next_consonant(lastname_2) + self.get_next_consonant(name) + self.hkey()
 
         return temp
 
@@ -108,16 +133,21 @@ def index():
         year = request.form.get('year')[2:]
         month = request.form.get('month')
         day = request.form.get('day')
-        sex = request.form.get('sex')
+        gen = request.form.get('gen')
         state = request.form.get('state')
         
+        print(request.form)
                 
-    
         curp = Mewcurp()
-        result = curp.gen(name, lname_1, lname_2, year, month, day, sex, state)
-        
+        curp_result = curp.gen(name, lname_1, lname_2, year, month, day, gen, state)
 
-        return render_template('curp.html', curp = result, name = name, lastname_1 = lname_1, lastname_2 = lname_2,  year = year, month = month, day = day, sex = sex, state = state)
+
+        validate_curp = Mewyacc()
+        error = validate_curp.analyze(curp_result)
+        if error:
+            return render_template('curp.html', curp = error)
+
+        return render_template('curp.html', curp = curp_result, name = name, lastname_1 = lname_1, lastname_2 = lname_2,  year = year, month = month, day = day, gen = 'Masculino' if gen == 'H' else 'Femenino', state = cities[state])
     return render_template('index.html')
 
 
